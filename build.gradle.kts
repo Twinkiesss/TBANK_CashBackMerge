@@ -84,7 +84,7 @@ tasks.withType<JavaCompile>().configureEach {
 
     options.encoding = "UTF-8"
     options.release = javaVersion.majorVersion.toInt()
-    options.compilerArgs.addAll(listOf("-Xlint:all,-processing,-serial", "-parameters"))
+    options.compilerArgs.addAll(listOf("-Xlint:all,-processing,-serial", "-parameters", "-proc:full"))
 
     options.errorprone {
         disableWarningsInGeneratedCode.set(true)

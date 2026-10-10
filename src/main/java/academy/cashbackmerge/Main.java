@@ -21,6 +21,6 @@ public final class Main {
 
         CampaignConfig config = ConfigLoader.load(EXAMPLE_CONFIG);
         GameState state = GameState.createInitial(config, DEFAULT_SEED);
-        System.out.println(BoardPrinter.print(state.board()));
+        System.out.println(BoardPrinter.print(state.getBoard()));
     }
 }

@@ -5,7 +5,9 @@ import academy.cashbackmerge.config.SpawnRule;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Random;
+import lombok.Getter;
 
+@Getter
 public final class GameState {
 
     private final Board board;
@@ -29,13 +31,13 @@ public final class GameState {
     }
 
     public void spawnTile(List<SpawnRule> rules) {
-        List<int[]> empty = board.emptyCells();
+        List<Cell> empty = board.emptyCells();
         if (empty.isEmpty()) {
             return;
         }
-        int[] cell = empty.get(rng.nextInt(empty.size()));
+        Cell cell = empty.get(rng.nextInt(empty.size()));
         Tile tile = pickTile(rules);
-        board.setTile(cell[0], cell[1], tile);
+        board.setTile(cell.row(), cell.col(), tile);
     }
 
     private Tile pickTile(List<SpawnRule> rules) {
@@ -48,21 +50,5 @@ public final class GameState {
             }
         }
         return new Tile(rules.get(rules.size() - 1).cashback());
-    }
-
-    public Board board() {
-        return board;
-    }
-
-    public int movesLimit() {
-        return movesLimit;
-    }
-
-    public int movesUsed() {
-        return movesUsed;
-    }
-
-    public long score() {
-        return score;
     }
 }

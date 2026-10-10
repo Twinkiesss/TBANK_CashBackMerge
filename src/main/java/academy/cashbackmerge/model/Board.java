@@ -38,12 +38,12 @@ public final class Board {
         return cells[row][col] == null;
     }
 
-    public List<int[]> emptyCells() {
-        List<int[]> result = new ArrayList<>();
+    public List<Cell> emptyCells() {
+        List<Cell> result = new ArrayList<>();
         for (int r = 0; r < size; r++) {
             for (int c = 0; c < size; c++) {
                 if (cells[r][c] == null) {
-                    result.add(new int[] {r, c});
+                    result.add(new Cell(r, c));
                 }
             }
         }

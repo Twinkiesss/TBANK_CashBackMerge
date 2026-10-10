@@ -36,7 +36,7 @@ class SeedTest {
         GameState a = GameState.createInitial(config(), SEED);
         GameState b = GameState.createInitial(config(), SEED);
 
-        assertThat(BoardPrinter.print(a.board())).isEqualTo(BoardPrinter.print(b.board()));
+        assertThat(BoardPrinter.print(a.getBoard())).isEqualTo(BoardPrinter.print(b.getBoard()));
     }
 
     @Test

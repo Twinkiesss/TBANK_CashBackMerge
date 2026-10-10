@@ -21,7 +21,7 @@ jackson = "2.22.2"
 picocli = "4.7.7"
 slf4j = "2.0.18"
 logback = "1.6.3"
-lombok = "1.18.48"
+lombok = "1.18.40"
 
 junit = "6.1.3"
 assertj = "3.27.7"
@@ -52,7 +52,6 @@ jackson-module-parameter-names = { module = "com.fasterxml.jackson.module:jackso
 slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 
-# Lombok — генерация кода (геттеры, сеттеры, билдеры).
 lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
 
 # Тесты. Версии задают junit-bom и mockito-bom.
