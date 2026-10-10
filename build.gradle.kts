@@ -11,23 +11,16 @@ plugins {
     alias(libs.plugins.errorprone)
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(25))
+    }
+}
+
 group = "academy"
 version = "1.0.0"
 
 val javaVersion = JavaVersion.VERSION_25
-if (JavaVersion.current() < javaVersion) {
-    throw GradleException(
-        """
-        |
-        |Нужен JDK $javaVersion или новее, а сборка запущена на JDK ${JavaVersion.current()}.
-        |
-        |IntelliJ IDEA: Settings -> Build Tools -> Gradle -> Gradle JVM.
-        |Терминал: установи JDK 25 и укажи его в JAVA_HOME.
-        |
-        |Сейчас используется: ${System.getProperty("java.home")}
-        """.trimMargin()
-    )
-}
 
 val utf8JvmArgs = listOf("-Dfile.encoding=UTF-8", "-Dstdout.encoding=UTF-8", "-Dstderr.encoding=UTF-8")
 
@@ -63,6 +56,11 @@ dependencies {
     // Раскомментируй, если понадобится:
     // testImplementation(platform(libs.mockito.bom))     // моки
     // testImplementation(libs.bundles.mockito)
+
+    compileOnly(libs.lombok)
+    annotationProcessor(libs.lombok)
+    testCompileOnly(libs.lombok)
+    testAnnotationProcessor(libs.lombok)
 }
 
 // Проверки Error Prone. Список повторяет соглашения внутренних Gradle-плагинов банка.
@@ -94,6 +92,8 @@ tasks.withType<JavaCompile>().configureEach {
         errorProneErrors.forEach { check(it, CheckSeverity.ERROR) }
         errorProneWarnings.forEach { check(it, CheckSeverity.WARN) }
         errorProneOff.forEach { check(it, CheckSeverity.OFF) }
+        option("NullAway:ExcludedFieldAnnotations", "lombok.Generated")
+        option("NullAway:CustomNullableAnnotations", "")
 
         if (isTestCompile) {
             // NullAway на тестах выключен: в фикстурах null подставляют намеренно.
