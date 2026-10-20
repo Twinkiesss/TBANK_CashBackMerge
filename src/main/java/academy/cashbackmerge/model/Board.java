@@ -172,6 +172,7 @@ public final class Board {
         return false;
     }
 
+    /** Возвращает количество плиток, которые сольются при ходе в эту сторону. */
     public int countMerges(Direction direction) {
         int merges = 0;
         for (int line = 0; line < size; line++) {
@@ -183,7 +184,6 @@ public final class Board {
                     compact[write++] = tile;
                 }
             }
-
             int i = 0;
             while (i < size - 1) {
                 if (compact[i] != null
