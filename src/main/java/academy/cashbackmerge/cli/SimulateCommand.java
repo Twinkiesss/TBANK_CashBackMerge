@@ -2,6 +2,7 @@ package academy.cashbackmerge.cli;
 
 import academy.cashbackmerge.config.CampaignConfig;
 import academy.cashbackmerge.config.ConfigLoader;
+import academy.cashbackmerge.simulation.GreedyStrategy;
 import academy.cashbackmerge.simulation.RandomStrategy;
 import academy.cashbackmerge.simulation.ReportWriter;
 import academy.cashbackmerge.simulation.SimulationResult;
@@ -40,8 +41,12 @@ public class SimulateCommand implements Callable<Integer> {
         }
 
         Simulator simulator = new Simulator(config);
-        SimulationResult result = simulator.simulate(players, () -> new RandomStrategy(seed));
-
+        SimulationResult result = simulator.simulate(players, () -> {
+            if ("greedy".equalsIgnoreCase(strategy)) {
+                return new GreedyStrategy();
+            }
+            return new RandomStrategy(seed);
+        });
         String report = ReportWriter.writeMarkdown(config, players, seed, strategy, result);
         Files.writeString(output, report);
 

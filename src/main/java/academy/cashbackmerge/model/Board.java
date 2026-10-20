@@ -171,4 +171,31 @@ public final class Board {
         }
         return false;
     }
+
+    public int countMerges(Direction direction) {
+        int merges = 0;
+        for (int line = 0; line < size; line++) {
+            Tile[] source = readLine(direction, line);
+            Tile[] compact = new Tile[size];
+            int write = 0;
+            for (Tile tile : source) {
+                if (tile != null) {
+                    compact[write++] = tile;
+                }
+            }
+
+            int i = 0;
+            while (i < size - 1) {
+                if (compact[i] != null
+                        && compact[i + 1] != null
+                        && compact[i].cashback().compareTo(compact[i + 1].cashback()) == 0) {
+                    merges++;
+                    i += 2;
+                } else {
+                    i++;
+                }
+            }
+        }
+        return merges;
+    }
 }

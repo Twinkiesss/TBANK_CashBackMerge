@@ -1,11 +1,12 @@
 package academy.cashbackmerge;
 
+import academy.cashbackmerge.cli.PlayCommand;
 import academy.cashbackmerge.cli.SimulateCommand;
 import picocli.CommandLine;
 
 @CommandLine.Command(
         name = "cashback-merge",
-        subcommands = {SimulateCommand.class})
+        subcommands = {SimulateCommand.class, PlayCommand.class})
 public class Main implements Runnable {
 
     public static void main(String[] args) {
