@@ -1,3 +1,8 @@
 package academy.cashbackmerge.model;
 
-public class Direction {}
+public enum Direction {
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+}

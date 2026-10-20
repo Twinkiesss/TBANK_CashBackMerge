@@ -1,7 +1,6 @@
 package academy.cashbackmerge.mandatory.mr1;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import academy.cashbackmerge.cli.BoardPrinter;
 import academy.cashbackmerge.config.CampaignConfig;
@@ -9,7 +8,6 @@ import academy.cashbackmerge.config.SpawnRule;
 import academy.cashbackmerge.model.GameState;
 import java.math.BigDecimal;
 import java.util.List;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -40,9 +38,14 @@ class SeedTest {
     }
 
     @Test
-    @Disabled("MR3: реализуй тест и удали эту строку")
     @DisplayName("Одинаковый конфиг, seed и стратегия дают одинаковый отчёт симуляции")
     void sameInputsProduceSameSimulationReport() {
-        fail("Тест не реализован");
+        academy.cashbackmerge.simulation.Simulator simulator = new academy.cashbackmerge.simulation.Simulator(config());
+
+        var result1 = simulator.simulate(5, () -> new academy.cashbackmerge.simulation.RandomStrategy(SEED));
+        var result2 = simulator.simulate(5, () -> new academy.cashbackmerge.simulation.RandomStrategy(SEED));
+
+        assertThat(result1.averageScore()).isEqualTo(result2.averageScore());
+        assertThat(result1.tileDistribution()).isEqualTo(result2.tileDistribution());
     }
 }
